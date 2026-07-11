@@ -23,7 +23,7 @@ export function ExperienceCanvas({ interactive, qualityTier }: { interactive: bo
   const ChapterComponent = chapter.component;
 
   return (
-    <div className="canvas-wrap" onClick={interactive ? triggerPulse : undefined}>
+    <div className="canvas-wrap" onDoubleClick={interactive ? triggerPulse : undefined} aria-label="Interactive 3D world. Drag to orbit, pinch or scroll to zoom, and double tap to pulse.">
       <Canvas dpr={qualityTier === 'low' ? 1 : qualityTier === 'medium' ? [1, 1.5] : [1, 2]} shadows={qualityTier !== 'low'} camera={{ position: chapter.cameraPreset.position, fov: chapter.cameraPreset.fov }}>
         <color attach="background" args={['#040611']} />
         <FogVolume />
@@ -40,7 +40,7 @@ export function ExperienceCanvas({ interactive, qualityTier }: { interactive: bo
         </Suspense>
       </Canvas>
       {!interactive ? <LoadingScreen /> : null}
-      <div className="pulse-readout">world pulse {pulse}</div>
+      <div className="pulse-readout" aria-live="polite">world pulse {pulse}</div>
     </div>
   );
 }
