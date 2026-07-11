@@ -1,6 +1,6 @@
 import { Suspense, useMemo } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { Environment } from '@react-three/drei';
+
 import { CameraDirector } from './camera/CameraDirector';
 import { ExplorerControls } from './controls/ExplorerControls';
 import { IdleDriftController } from './controls/IdleDriftController';
@@ -12,8 +12,9 @@ import { WorldLighting } from './lighting/WorldLighting';
 import { WorldPostFX } from './post/WorldPostFX';
 import { selectActiveChapter, useWorldStore } from '../app/world-store';
 import { LoadingScreen } from '../components/LoadingScreen';
+import type { QualityTier } from '../lib/performance';
 
-export function ExperienceCanvas({ interactive }: { interactive: boolean }) {
+export function ExperienceCanvas({ interactive, qualityTier }: { interactive: boolean; qualityTier: QualityTier }) {
   const activeChapterId = useWorldStore((state) => state.activeChapterId);
   const pulse = useWorldStore((state) => state.pulse);
   const triggerPulse = useWorldStore((state) => state.triggerPulse);
@@ -22,8 +23,8 @@ export function ExperienceCanvas({ interactive }: { interactive: boolean }) {
   const ChapterComponent = chapter.component;
 
   return (
-    <div className="canvas-wrap" onClick={interactive ? triggerPulse : undefined}>
-      <Canvas shadows camera={{ position: chapter.cameraPreset.position, fov: chapter.cameraPreset.fov }}>
+    <div className="canvas-wrap" onDoubleClick={interactive ? triggerPulse : undefined} aria-label="Interactive 3D world. Drag to orbit, pinch or scroll to zoom, and double tap to pulse.">
+      <Canvas dpr={qualityTier === 'low' ? 1 : qualityTier === 'medium' ? [1, 1.5] : [1, 2]} shadows={qualityTier !== 'low'} camera={{ position: chapter.cameraPreset.position, fov: chapter.cameraPreset.fov }}>
         <color attach="background" args={['#040611']} />
         <FogVolume />
         <Suspense fallback={null}>
@@ -31,16 +32,15 @@ export function ExperienceCanvas({ interactive }: { interactive: boolean }) {
           <IdleDriftController active={!interactive} />
           <WorldLighting />
           <SkyDome />
-          <StarsField />
+          <StarsField quality={qualityTier} />
           <GroundPlane tint={chapter.palette[2]} />
-          <Environment preset="night" />
           <ChapterComponent pulse={pulse} />
-          <ExplorerControls />
-          <WorldPostFX />
+          <ExplorerControls mode={chapter.movementMode} />
+          <WorldPostFX enabled={qualityTier === 'high' && chapter.qualityHint !== 'low'} />
         </Suspense>
       </Canvas>
       {!interactive ? <LoadingScreen /> : null}
-      <div className="pulse-readout">world pulse {pulse}</div>
+      <div className="pulse-readout" aria-live="polite">world pulse {pulse}</div>
     </div>
   );
 }

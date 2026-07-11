@@ -6,11 +6,12 @@ interface HudProps {
   immersive: boolean;
   qualityTier: string;
   onToggleImmersive: () => void;
-  onTogglePanel: () => void;
-  onToggleAudio: () => void;
+  onPrevious: () => void;
+  onNext: () => void;
+  onPulse: () => void;
 }
 
-export function Hud({ activeChapterId, immersive, qualityTier, onToggleImmersive, onTogglePanel, onToggleAudio }: HudProps) {
+export function Hud({ activeChapterId, immersive, qualityTier, onToggleImmersive, onPrevious, onNext, onPulse }: HudProps) {
   const chapter = chapters.find((entry) => entry.id === activeChapterId) ?? chapters[0];
 
   return (
@@ -22,9 +23,10 @@ export function Hud({ activeChapterId, immersive, qualityTier, onToggleImmersive
       </div>
       <div className="hud-actions">
         <PerformanceBadge tier={qualityTier} />
+        <button type="button" onClick={onPrevious} aria-label="Previous chapter">← Previous</button>
+        <button type="button" onClick={onPulse}>Pulse <kbd>Space</kbd></button>
+        <button type="button" onClick={onNext} aria-label="Next chapter">Next →</button>
         <button type="button" onClick={onToggleImmersive}>{immersive ? 'Windowed mode' : 'Immersive mode'}</button>
-        <button type="button" onClick={onTogglePanel}>Toggle notes</button>
-        <button type="button" onClick={onToggleAudio}>Ambient audio placeholder</button>
       </div>
     </div>
   );
