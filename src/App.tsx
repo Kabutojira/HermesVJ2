@@ -14,18 +14,17 @@ function App() {
   const immersive = useUiStore((state) => state.immersive);
   const enterWorld = useUiStore((state) => state.enterWorld);
   const toggleImmersive = useUiStore((state) => state.toggleImmersive);
-  const toggleDetailPanel = useUiStore((state) => state.toggleDetailPanel);
-  const toggleAudio = useUiStore((state) => state.toggleAudio);
+
   const activeChapterId = useWorldStore((state) => state.activeChapterId);
   const setActiveChapter = useWorldStore((state) => state.setActiveChapter);
 
   return (
     <Shell immersive={immersive}>
       <ErrorBoundary>
-        <ExperienceCanvas interactive={entered} />
+        <ExperienceCanvas interactive={entered} qualityTier={qualityTier} />
         <HeroOverlay entered={entered} onEnter={enterWorld} />
         <div className="chrome-layer">
-          <Hud activeChapterId={activeChapterId} immersive={immersive} qualityTier={qualityTier} onToggleImmersive={toggleImmersive} onTogglePanel={toggleDetailPanel} onToggleAudio={toggleAudio} />
+          <Hud activeChapterId={activeChapterId} immersive={immersive} qualityTier={qualityTier} onToggleImmersive={toggleImmersive} />
           <ChapterRail activeChapterId={activeChapterId} onSelect={setActiveChapter} />
         </div>
       </ErrorBoundary>

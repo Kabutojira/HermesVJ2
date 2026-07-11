@@ -1,6 +1,7 @@
 import { Bloom, ChromaticAberration, EffectComposer, Noise, Vignette } from '@react-three/postprocessing';
 
-export function WorldPostFX() {
+export function WorldPostFX({ enabled }: { enabled: boolean }) {
+  if (!enabled) return null;
   return <EffectComposer multisampling={2}>
     <Bloom intensity={0.75} luminanceThreshold={0.5} mipmapBlur />
     <Noise opacity={0.03} premultiply />

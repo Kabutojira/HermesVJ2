@@ -11,7 +11,7 @@ if (!latestMatch) {
   throw new Error('manifest must set latestChapterId from the first registered chapter');
 }
 
-if (!registrySource.includes('chapter001LotusGate') || !registrySource.includes('chapter002WormholeSpire')) {
+if (!registrySource.includes('LotusGateWorld') || !registrySource.includes('WormholeSpireWorld')) {
   throw new Error('registry is missing one of the launch chapters');
 }
 

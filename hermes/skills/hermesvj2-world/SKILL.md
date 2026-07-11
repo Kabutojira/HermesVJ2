@@ -9,7 +9,7 @@ platforms: [linux, macos]
 
 Use this skill whenever you add or refine chapters, camera behavior, atmosphere, interaction, or documentation in HermesVJ2.
 
-Required: load at least one coding skill before editing (`ponytail`, `test-driven-development`, `systematic-debugging`, `requesting-code-review`).
+Required: load at least one available coding skill before editing (`codex`, `test-driven-development`, `systematic-debugging`, `simplify-code`, or `requesting-code-review`).
 
 Workflow:
 1. Read `AGENTS.md`, `README.md`, and the relevant chapter brief.

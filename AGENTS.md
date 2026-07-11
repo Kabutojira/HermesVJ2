@@ -6,7 +6,7 @@ HermesVJ2 is an independent Three.js-based 3D web experience designed for contin
 
 Before changing code in this repository, Hermes agents must:
 1. Load the repo-local `hermesvj2-world` skill.
-2. Load at least one relevant coding skill (`ponytail`, `test-driven-development`, `systematic-debugging`, or `requesting-code-review`).
+2. Load at least one available coding skill (`codex`, `test-driven-development`, `systematic-debugging`, `simplify-code`, or `requesting-code-review`).
 3. Read `README.md` plus the chapter brief for any world they plan to edit.
 4. Run `npm test`, `npm run build`, and `npm run validate` before handoff.
 
