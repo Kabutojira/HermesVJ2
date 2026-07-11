@@ -1,0 +1,1 @@
+Create or refine a HermesVJ2 chapter. Keep one dominant spatial subject, preserve negative space, use a dark palette with two main hues and one accent, and update tests/docs when shared contracts change.

@@ -1,0 +1,1 @@
+Refactor HermesVJ2 engine or chapter code without flattening the artistic effect. Keep engine concerns in src/experience and chapter content in src/worlds. Verify with npm test, npm run build, and npm run validate.
