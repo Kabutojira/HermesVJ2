@@ -18,7 +18,7 @@ npm run build
 npm run preview
 ```
 
-Open `http://127.0.0.1:4173/hermesvj2/` for preview with the default Pages base path.
+Open `http://127.0.0.1:4173/HermesVJ2/` for preview with the default Pages base path.
 For local root-path development use `HERMESVJ2_BASE=/ npm run dev`.
 
 ## Controls
@@ -44,7 +44,7 @@ docs                MVP plan, visual language, runtime architecture
 ```
 
 ## Deployment model
-The Vite base path defaults to `/hermesvj2/`, so GitHub Pages deployment for a repo named `hermesvj2` works cleanly.
+The production Vite base path defaults to `/HermesVJ2/`, matching the repository's case-sensitive GitHub Pages URL: `https://kabutojira.github.io/HermesVJ2/`.
 Suggested bootstrap:
 ```bash
 git init
