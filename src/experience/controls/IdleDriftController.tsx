@@ -1,9 +1,14 @@
 import { useFrame, useThree } from '@react-three/fiber';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
+import { Vector3, type Vector3Tuple } from 'three';
 
-export function IdleDriftController({ active }: { active: boolean }) {
+export function IdleDriftController({ active, baselinePosition }: { active: boolean; baselinePosition: Vector3Tuple }) {
   const { camera } = useThree();
-  const baseline = useRef(camera.position.clone());
+  const baseline = useRef(new Vector3(...baselinePosition));
+
+  useEffect(() => {
+    baseline.current.set(...baselinePosition);
+  }, [baselinePosition]);
 
   useFrame(({ clock }) => {
     if (!active) return;

@@ -8,10 +8,16 @@ interface WorldState {
   triggerPulse: () => void;
 }
 
+const initialChapterId = () => {
+  if (typeof window === 'undefined') return chapters[0].id;
+  const requested = new URLSearchParams(window.location.search).get('chapter');
+  return requested && chapterMap[requested] ? requested : chapters[0].id;
+};
+
 export const useWorldStore = create<WorldState>((set) => ({
-  activeChapterId: chapters[0].id,
+  activeChapterId: initialChapterId(),
   pulse: 0,
-  setActiveChapter: (id) => set({ activeChapterId: id }),
+  setActiveChapter: (id) => set({ activeChapterId: chapterMap[id] ? id : chapters[0].id }),
   triggerPulse: () => set((state) => ({ pulse: state.pulse + 1 })),
 }));
 
