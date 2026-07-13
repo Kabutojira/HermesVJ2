@@ -51,7 +51,9 @@ npm run preview                     # serve the production bundle on 0.0.0.0:417
 - Start from the chapter brief and palette. Keep chapter constants/configuration near that chapter; promote a utility to `src/worlds/shared` only after it is genuinely shared.
 - Chapter scene components receive `{ pulse: number }`. Treat a pulse change as a cue for an atmospheric response, not as mutable global gameplay state.
 - Register chapters through a typed config and lazy import in `src/worlds/registry.ts`. Keep IDs stable because `?chapter=<id>` URLs are shareable.
-- Prefer procedural geometry and lightweight generated effects. Put imported static assets under `src/assets` (or a clearly chapter-owned asset directory), use Vite-resolved imports when practical, optimize them before committing, and do not fetch runtime assets from an unversioned third-party URL.
+- Prefer original procedural geometry and lightweight generated effects. Put imported static assets under `src/assets` (or a clearly chapter-owned asset directory), use Vite-resolved imports when practical, optimize them before committing, and do not fetch runtime assets from an unversioned third-party URL.
+- Treat repository content as all rights reserved unless a file explicitly says otherwise. Do not copy code, scenes, models, textures, audio, or other assets from `hermesvj` or an unknown source. Before adding a third-party asset, verify that its license permits repository and web distribution; record its source URL, author, license/SPDX identifier, and modifications in `docs/assets.md` (create the ledger if needed), and retain any required notices. Reject assets whose provenance or license cannot be verified.
+- Do not assume a generated asset is unrestricted: record the generator/source and applicable usage terms. Never commit credentials, private data, trademarked brand material, or an asset whose terms require restrictions this static deployment cannot satisfy.
 - Dispose of manually created Three.js resources, memoize expensive generated data, and never allocate geometry, materials, vectors, or arrays on every `useFrame` tick.
 
 ## Interaction, accessibility, and performance constraints
@@ -74,6 +76,8 @@ npm run preview                     # serve the production bundle on 0.0.0.0:417
 7. Document intentional art-direction or architecture changes in the chapter brief or relevant document; do not let code silently contradict the authored intent.
 
 ## Completion checks
+
+Every change must preserve a working, static-deployable experience. Do not leave placeholder imports, broken chapter registrations, development-only URLs, secrets, required local services, or an unbuilt follow-up for another agent. Keep the default production base path and Pages workflow working unless the task explicitly changes the deployment target. If a larger redesign cannot land safely in one change, ship an independently deployable increment instead.
 
 Before handoff, all of these must pass:
 
