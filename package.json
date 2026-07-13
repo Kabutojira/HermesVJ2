@@ -10,9 +10,7 @@
     "test:watch": "vitest",
     "lint": "oxlint src tests",
     "preview": "vite preview --host 0.0.0.0 --port 4173",
-    "validate": "node scripts/validate_world.mjs",
-    "capture": "node scripts/capture_world_preview.mjs",
-    "publish": "node scripts/publish_world.mjs"
+    "validate": "node scripts/validate_world.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",
