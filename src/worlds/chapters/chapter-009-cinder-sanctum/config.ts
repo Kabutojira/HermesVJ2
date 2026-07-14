@@ -1,0 +1,3 @@
+import type { CameraPreset } from '../../../experience/camera/cameraPresets';
+const cameraPreset: CameraPreset = { position: [0, 4.5, 13.5], target: [0, 2.6, 0], fov: 44 };
+export const cinderSanctumConfig = { id: 'chapter-009-cinder-sanctum', title: 'Cinder Sanctum', description: 'A procedural flame sanctum feeds sparks into molten paths.', palette: ['#100609', '#ff6b35', '#ffc15c', '#6c1c20'], movementMode: 'guided' as const, qualityHint: 'medium' as const, cameraPreset, previewImage: '/social-preview.svg', createdAt: '2026-07-14T06:31:00Z', moodPrompt: 'obsidian fire sanctum, molten paths, sparse sparks, ritual heat' };

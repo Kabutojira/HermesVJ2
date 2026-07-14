@@ -1,0 +1,3 @@
+import type { CameraPreset } from '../../../experience/camera/cameraPresets';
+const cameraPreset: CameraPreset = { position: [0, 5.2, 15], target: [0, 3, 0], fov: 46 };
+export const nebulaFountainConfig = { id: 'chapter-010-nebula-fountain', title: 'Nebula Fountain', description: 'Eleven plasma arcs rise from a toroidal stellar well.', palette: ['#050719', '#8bf5ff', '#c58cff', '#293b78'], movementMode: 'orbit' as const, qualityHint: 'high' as const, cameraPreset, previewImage: '/social-preview.svg', createdAt: '2026-07-14T06:32:00Z', moodPrompt: 'toroidal stellar well, eleven plasma fountains, violet particle mist' };

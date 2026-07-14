@@ -10,6 +10,11 @@ import { solarChoirConfig } from './chapters/chapter-004-solar-choir/config';
 import { tideCathedralConfig } from './chapters/chapter-005-tide-cathedral/config';
 import { emberLoomConfig } from './chapters/chapter-006-ember-loom/config';
 import { auroraReliquaryConfig } from './chapters/chapter-007-aurora-reliquary/config';
+import { tempestLanternConfig } from './chapters/chapter-008-tempest-lantern/config';
+import { cinderSanctumConfig } from './chapters/chapter-009-cinder-sanctum/config';
+import { nebulaFountainConfig } from './chapters/chapter-010-nebula-fountain/config';
+import { frostOracleConfig } from './chapters/chapter-011-frost-oracle/config';
+import { thunderForgeConfig } from './chapters/chapter-012-thunder-forge/config';
 
 export interface WorldSceneProps {
   pulse: number;
@@ -39,6 +44,11 @@ const SolarChoirWorld = lazy(() => import('./chapters/chapter-004-solar-choir/sc
 const TideCathedralWorld = lazy(() => import('./chapters/chapter-005-tide-cathedral/scene/TideCathedralWorld').then((module) => ({ default: module.TideCathedralWorld })));
 const EmberLoomWorld = lazy(() => import('./chapters/chapter-006-ember-loom/scene/EmberLoomWorld').then((module) => ({ default: module.EmberLoomWorld })));
 const AuroraReliquaryWorld = lazy(() => import('./chapters/chapter-007-aurora-reliquary/scene/AuroraReliquaryWorld').then((module) => ({ default: module.AuroraReliquaryWorld })));
+const TempestWorld = lazy(() => import('./chapters/chapter-008-tempest-lantern/scene/TempestWorld').then((module) => ({ default: module.TempestWorld })));
+const CinderWorld = lazy(() => import('./chapters/chapter-009-cinder-sanctum/scene/CinderWorld').then((module) => ({ default: module.CinderWorld })));
+const NebulaWorld = lazy(() => import('./chapters/chapter-010-nebula-fountain/scene/NebulaWorld').then((module) => ({ default: module.NebulaWorld })));
+const FrostWorld = lazy(() => import('./chapters/chapter-011-frost-oracle/scene/FrostWorld').then((module) => ({ default: module.FrostWorld })));
+const ThunderWorld = lazy(() => import('./chapters/chapter-012-thunder-forge/scene/ThunderWorld').then((module) => ({ default: module.ThunderWorld })));
 
 export const chapters: WorldChapter[] = [
   { ...lotusGateConfig, component: LotusGateWorld, interactionModel: { primaryAction: 'Click to send a pulse through the gate halo.', ambientResponse: 'Petals drift and the orbital halo breathes around the gate.' } },
@@ -48,5 +58,10 @@ export const chapters: WorldChapter[] = [
   { ...tideCathedralConfig, component: TideCathedralWorld, interactionModel: { primaryAction: 'Pulse the floating pearl.', ambientResponse: 'Tidal ribs shimmer around the nave.' } },
   { ...emberLoomConfig, component: EmberLoomWorld, interactionModel: { primaryAction: 'Pulse the obsidian spindle.', ambientResponse: 'Molten threads retune their weave.' } },
   { ...auroraReliquaryConfig, component: AuroraReliquaryWorld, interactionModel: { primaryAction: 'Pulse the captive aurora.', ambientResponse: 'The reliquary redraws its orbital field.' } },
+  { ...tempestLanternConfig, component: TempestWorld, interactionModel: { primaryAction: 'Pulse the charged lantern.', ambientResponse: 'Rain, particles, and branching lightning expand as the lantern flares.' } },
+  { ...cinderSanctumConfig, component: CinderWorld, interactionModel: { primaryAction: 'Pulse the sanctum flame.', ambientResponse: 'Fire rises while sparks and molten paths brighten outward.' } },
+  { ...nebulaFountainConfig, component: NebulaWorld, interactionModel: { primaryAction: 'Pulse the stellar well.', ambientResponse: 'Eleven plasma fountains expand through the particle mist.' } },
+  { ...frostOracleConfig, component: FrostWorld, interactionModel: { primaryAction: 'Pulse the ice oracle.', ambientResponse: 'Snow, the ice crown, and cold light answer together.' } },
+  { ...thunderForgeConfig, component: ThunderWorld, interactionModel: { primaryAction: 'Pulse the hammer ring.', ambientResponse: 'Electric branches, sparks, and gold-blue forge light surge.' } },
 ];
 export const chapterMap = Object.fromEntries(chapters.map((chapter) => [chapter.id, chapter])) as Record<string, WorldChapter>;

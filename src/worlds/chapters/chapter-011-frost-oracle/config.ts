@@ -1,0 +1,3 @@
+import type { CameraPreset } from '../../../experience/camera/cameraPresets';
+const cameraPreset: CameraPreset = { position: [0, 4.6, 13.5], target: [0, 2.8, 0], fov: 44 };
+export const frostOracleConfig = { id: 'chapter-011-frost-oracle', title: 'Frost Oracle', description: 'An ice crown reads the weather in snow and cold light.', palette: ['#050a18', '#a9efff', '#738cff', '#d9f8ff'], movementMode: 'guided' as const, qualityHint: 'medium' as const, cameraPreset, previewImage: '/social-preview.svg', createdAt: '2026-07-14T06:33:00Z', moodPrompt: 'ice crown oracle, diagonal snow, crystalline blue-white light' };
