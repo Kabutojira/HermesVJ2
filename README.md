@@ -1,88 +1,161 @@
 # HermesVJ2
 
-HermesVJ2 is a static-deployable React + Three.js dreamworld built for browser-based exploration and agent-driven iteration.
+HermesVJ2 is an authored, browser-based dreamworld built with React, TypeScript, Three.js, and React Three Fiber. It is an independent, static-deployable experience designed for visual exploration and careful agent-driven iteration.
 
-## What ships in this MVP
-- A Vite + React + TypeScript application at the repository root
-- A React Three Fiber experience canvas with lights, fog, stars, post-processing, and responsive layout
-- Two launch chapters: `Lotus Gate` and `Wormhole Spire`
-- Zustand stores for UI and world state
-- Repo-local agent guidance and templates for extending the world coherently
-- Unit tests plus build validation for the chapter manifest and camera contracts
+The current world contains two chapters:
 
-## Quick start
+- **Lotus Gate** — a luminous ceremonial threshold in a dark reflective field.
+- **Wormhole Spire** — a vertical cosmic landmark shaped by orbital motion and restrained bloom.
+
+Production: **https://kabutojira.github.io/HermesVJ2/**
+
+## Prerequisites
+
+- Git
+- Node.js `^20.19.0` or `>=22.12.0` (Node 22 LTS recommended)
+- npm 10 or newer
+- A browser with WebGL 2 support
+
+No server, database, environment secrets, or external asset service is required.
+
+## Install
+
+Clone the repository and install the exact dependency versions from the lockfile:
+
 ```bash
-npm install
-npm test
-npm run build
-npm run preview
+git clone https://github.com/Kabutojira/HermesVJ2.git
+cd HermesVJ2
+npm ci
 ```
 
-Open `http://127.0.0.1:4173/HermesVJ2/` for preview with the default Pages base path.
-For local root-path development use `HERMESVJ2_BASE=/ npm run dev`.
+Use `npm install` instead only when intentionally changing dependencies and committing the resulting `package-lock.json` update.
 
-## Controls
+## Develop
 
-- Drag with a pointer or one finger to orbit inside the authored camera envelope.
-- Scroll or pinch to move closer and farther away.
-- Double-click/double-tap the world, press `Space`, or use the Pulse button to resonate the landmark.
-- Press `A`/`←` and `D`/`→`, or use the HUD controls, to move between chapters.
-- Chapter URLs are shareable through the `?chapter=...` query parameter.
+Start the Vite development server:
 
-The interface uses touch-friendly controls, visible keyboard focus, safe-area insets, and honors `prefers-reduced-motion`. If WebGL initialization fails, the error boundary leaves a readable recovery screen instead of a blank page.
-
-## Project structure
-```text
-src/app             UI and world stores
-src/components      HUD, chapter rail, overlay, shell
-src/experience      camera, controls, environment, lighting, post FX
-src/worlds          chapter registry, manifest, scene modules, prompts
-tests               manifest + camera + interaction tests
-scripts             validation, capture, publish helpers
-hermes/skills       repo-local worldbuilding skill and templates
-docs                MVP plan, visual language, runtime architecture
+```bash
+npm run dev
 ```
 
-## Production deployment
+Open the URL printed by Vite (normally `http://localhost:5173/`). Development uses the root base path. To set it explicitly:
 
-The production experience is available over HTTPS at:
+```bash
+HERMESVJ2_BASE=/ npm run dev
+```
 
-**https://kabutojira.github.io/HermesVJ2/**
+Useful scripts:
 
-GitHub Pages is configured with **GitHub Actions** as its source. The single deployment workflow, `.github/workflows/pages.yml`, runs on every push to `main` and can also be started manually from the Actions tab. It installs the locked dependencies with `npm ci`, then runs tests, world validation, linting, and the production build before uploading `dist/` and deploying it to the `github-pages` environment. No deployment secrets are required.
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Start the Vite development server with hot reload. |
+| `npm test` | Run the Vitest unit and contract suite once. |
+| `npm run test:watch` | Run Vitest in watch mode while iterating. |
+| `npm run lint` | Run oxlint over `src/` and `tests/`. |
+| `npm run validate` | Validate chapter directories and registry entries. |
+| `npm run build` | Type-check and create the production bundle in `dist/`. |
+| `npm run preview` | Serve `dist/` on port 4173. |
 
-The production Vite base path defaults to the case-sensitive `/HermesVJ2/`, matching the repository name. To reproduce the Pages build locally from a clean checkout:
+`npm run capture` currently prints the manual capture workflow; it is not an automated visual test.
+
+## Build and test
+
+Run the complete pre-handoff validation from a clean checkout:
 
 ```bash
 npm ci
 npm test
-npm run validate
 npm run lint
+npm run validate
 npm run build
+```
+
+The production build defaults to the case-sensitive GitHub Pages base path `/HermesVJ2/`. Preview it locally with:
+
+```bash
 npm run preview
 ```
 
-Open `http://127.0.0.1:4173/HermesVJ2/` and verify both chapters, their direct `?chapter=...` URLs, and the browser console before publishing.
+Then open `http://127.0.0.1:4173/HermesVJ2/` and smoke-test both chapters. For a root-hosted production build, override the base path:
 
-### Deploy
+```bash
+HERMESVJ2_BASE=/ npm run build
+npm run preview
+```
 
-1. Merge the release commit into `main`, or select **Actions → deploy-pages → Run workflow** to redeploy the current `main` commit.
+A change is not complete merely because TypeScript compiles. Visual, camera, interaction, lighting, asset, or post-processing changes must also be checked in a real browser at narrow and wide viewports, with the console free of errors.
+
+## Interaction controls
+
+| Input | Action |
+| --- | --- |
+| Pointer drag / one-finger drag | Orbit within the authored camera envelope. |
+| Wheel / pinch | Move closer to or farther from the landmark. |
+| Double-click / double-tap | Pulse the active chapter. |
+| `Space` | Pulse the active chapter. |
+| `A`, `D`, `←`, `→` | Move between chapters. |
+| HUD buttons | Pulse or navigate without keyboard gestures. |
+
+Chapter URLs are shareable through `?chapter=<chapter-id>`, for example:
+
+`https://kabutojira.github.io/HermesVJ2/?chapter=chapter-002-wormhole-spire`
+
+The interface provides visible keyboard focus, touch-sized controls, safe-area-aware layout, reduced-motion behavior, and a readable recovery screen when WebGL initialization fails.
+
+## Repository structure
+
+```text
+.github/workflows/       GitHub Pages build and deployment workflow
+hermes/skills/           Repo-local worldbuilding skill and templates
+public/                  Static icons and social-preview assets
+scripts/                 World validation, capture, and publish helpers
+src/app/                 Zustand UI and serializable world state
+src/components/          DOM shell, HUD, chapter rail, loading, fallbacks
+src/content/             Onboarding copy and world lore
+src/experience/          Shared camera, controls, environment, light, post FX
+src/lib/                 Runtime, navigation, viewport, and quality helpers
+src/worlds/              Typed chapter registry, shared contracts, scenes
+src/worlds/chapters/     Chapter-owned config, scene, and creative brief
+tests/                   Manifest, camera, navigation, and interaction tests
+docs/                    Art direction, architecture, and implementation plans
+AGENTS.md                 Mandatory guidance for coding agents
+```
+
+Read `AGENTS.md` before contributing. Agents must also load `hermes/skills/hermesvj2-world/SKILL.md` and an appropriate coding skill before changing the 3D world. The art direction is defined in `docs/art-direction/visual-language.md`; architecture decisions live in `docs/architecture/3d-redesign.md` and `docs/architecture/runtime-architecture.md`.
+
+## Adding or changing a chapter
+
+1. Start from the chapter brief under `src/worlds/chapters/<chapter-id>/prompts/brief.md`.
+2. Keep chapter-owned geometry, animation, and constants inside that chapter.
+3. Register the chapter through a typed config and lazy import in `src/worlds/registry.ts`.
+4. Keep chapter IDs stable because they are part of shareable URLs.
+5. Add or update tests and run the full validation sequence above.
+6. Preview every registered chapter after changing shared camera, controls, environment, lighting, or post-processing.
+
+Prefer original procedural geometry. External assets must have a verified license compatible with distribution, be optimized before commit, and have their source, author, license, and modifications recorded. Do not copy source code or assets from `hermesvj`, and do not introduce unversioned runtime asset URLs.
+
+## Deployment
+
+GitHub Pages uses **GitHub Actions** as its source. `.github/workflows/pages.yml` is the single deployment workflow. Every push to `main` runs installation, tests, world validation, linting, and the production build before deploying `dist/` to the `github-pages` environment. The workflow can also be started manually from the Actions tab and requires no repository secrets.
+
+To deploy:
+
+1. Merge a reviewed change into `main`, or run **Actions → deploy-pages → Run workflow**.
 2. Wait for both the `build` and `deploy` jobs to pass.
-3. Open the production URL above and verify that the HTML, JavaScript, CSS, icons, and chapter modules load without 404 or console-blocking errors.
+3. Open the production URL and verify both chapter query URLs, controls, and browser console.
+4. Confirm JavaScript, CSS, icons, and lazy chapter chunks load without 404s.
 
-The repository setting **Settings → Pages → Build and deployment → Source** must remain set to **GitHub Actions**. The workflow uses only the scoped `pages: write` and `id-token: write` permissions; do not add credentials to the repository.
+Keep **Settings → Pages → Build and deployment → Source** set to **GitHub Actions**. The workflow intentionally uses only `pages: write` and `id-token: write` permissions.
 
 ### Roll back
 
-1. In GitHub, identify the last known-good commit on `main`.
-2. Revert the faulty commit with a new commit (do not rewrite shared history):
+Restore a known-good version with a new revert commit; do not rewrite shared history:
 
-   ```bash
-   git checkout main
-   git pull --ff-only origin main
-   git revert <faulty-commit-sha>
-   git push origin main
-   ```
+```bash
+git checkout main
+git pull --ff-only origin main
+git revert <faulty-commit-sha>
+git push origin main
+```
 
-3. The push automatically deploys the reverted state. Monitor the `deploy-pages` run, then repeat the production smoke check.
-4. If the application must be restored before a revert is ready, open the last successful `deploy-pages` run for the known-good commit and use **Re-run all jobs**. Follow with a revert so the next `main` deployment cannot reintroduce the faulty version.
+The push deploys the reverted state. Monitor the Pages workflow and repeat the production smoke test. Re-running an older successful workflow can provide a temporary restore, but follow it with a revert so the next deployment cannot reintroduce the faulty commit.
