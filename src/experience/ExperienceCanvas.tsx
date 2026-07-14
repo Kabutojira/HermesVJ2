@@ -35,7 +35,7 @@ export function ExperienceCanvas({ interactive, qualityTier }: { interactive: bo
           <StarsField quality={qualityTier} />
           <GroundPlane tint={chapter.palette[2]} />
           <ChapterComponent pulse={pulse} />
-          <ExplorerControls mode={chapter.movementMode} />
+          <ExplorerControls mode={chapter.movementMode} baseFov={chapter.cameraPreset.fov} enabled={interactive} />
           <WorldPostFX enabled={qualityTier === 'high' && chapter.qualityHint !== 'low'} />
         </Suspense>
       </Canvas>

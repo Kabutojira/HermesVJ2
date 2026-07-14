@@ -1,0 +1,3 @@
+import type { CameraPreset } from '../../../experience/camera/cameraPresets';
+const cameraPreset: CameraPreset = { position: [0, 4.5, 15], target: [0, 3.2, 0], fov: 47 };
+export const tideCathedralConfig = { id: 'chapter-005-tide-cathedral', title: 'Tide Cathedral', description: 'Luminous ribs rise from mirror water to shelter a floating pearl.', palette: ['#031019', '#70e6ff', '#7387ff', '#e8fbff'], movementMode: 'orbit' as const, qualityHint: 'medium' as const, cameraPreset, previewImage: '/social-preview.svg', createdAt: '2026-07-14T05:02:00Z', moodPrompt: 'submerged luminous cathedral, mirror water, blue pearl, vast negative space' };

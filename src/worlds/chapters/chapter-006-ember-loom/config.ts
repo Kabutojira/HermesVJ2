@@ -1,0 +1,3 @@
+import type { CameraPreset } from '../../../experience/camera/cameraPresets';
+const cameraPreset: CameraPreset = { position: [0, 4.3, 13], target: [0, 2.8, 0], fov: 44 };
+export const emberLoomConfig = { id: 'chapter-006-ember-loom', title: 'Ember Loom', description: 'Molten threads weave through an obsidian spindle into a celestial textile.', palette: ['#100708', '#ff784f', '#ffc46b', '#9e7cff'], movementMode: 'orbit' as const, qualityHint: 'medium' as const, cameraPreset, previewImage: '/social-preview.svg', createdAt: '2026-07-14T05:03:00Z', moodPrompt: 'obsidian cosmic loom, molten threads, controlled ember glow, ritual textile' };

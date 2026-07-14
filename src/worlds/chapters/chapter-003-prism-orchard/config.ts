@@ -1,0 +1,3 @@
+import type { CameraPreset } from '../../../experience/camera/cameraPresets';
+const cameraPreset: CameraPreset = { position: [0, 4.2, 13], target: [0, 2.4, 0], fov: 44 };
+export const prismOrchardConfig = { id: 'chapter-003-prism-orchard', title: 'Prism Orchard', description: 'Levitating crystal seeds refract a cyan dawn around a radiant crown.', palette: ['#07101d', '#7df9ff', '#d99cff', '#f7e7a8'], movementMode: 'orbit' as const, qualityHint: 'medium' as const, cameraPreset, previewImage: '/social-preview.svg', createdAt: '2026-07-14T05:00:00Z', moodPrompt: 'levitating crystal orchard, cyan refractions, quiet ceremonial dawn' };
