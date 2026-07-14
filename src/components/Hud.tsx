@@ -17,7 +17,7 @@ export function Hud({ activeChapterId, immersive, qualityTier, onToggleImmersive
   return (
     <div className="hud">
       <div>
-        <p className="eyebrow">Latest chapter</p>
+        <p className="eyebrow">Active chapter</p>
         <h2>{chapter.title}</h2>
         <p>{chapter.description}</p>
       </div>

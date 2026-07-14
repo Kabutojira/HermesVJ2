@@ -1,7 +1,8 @@
 import type { CameraPreset } from '../experience/camera/cameraPresets';
+import type { QualityTier } from '../lib/performance';
 import type { MovementMode } from './shared/biomeTypes';
 import type { InteractionModel } from './shared/interactionTypes';
-import { lazy } from 'react';
+import { lazy, type ComponentType } from 'react';
 import { lotusGateConfig } from './chapters/chapter-001-lotus-gate/config';
 import { wormholeSpireConfig } from './chapters/chapter-002-wormhole-spire/config';
 import { prismOrchardConfig } from './chapters/chapter-003-prism-orchard/config';
@@ -10,19 +11,25 @@ import { tideCathedralConfig } from './chapters/chapter-005-tide-cathedral/confi
 import { emberLoomConfig } from './chapters/chapter-006-ember-loom/config';
 import { auroraReliquaryConfig } from './chapters/chapter-007-aurora-reliquary/config';
 
+export interface WorldSceneProps {
+  pulse: number;
+  qualityTier: QualityTier;
+  reducedMotion: boolean;
+}
+
 export interface WorldChapter {
   id: string;
   title: string;
   description: string;
   palette: string[];
   movementMode: MovementMode;
-  qualityHint: 'low' | 'medium' | 'high';
+  qualityHint: QualityTier;
   cameraPreset: CameraPreset;
   interactionModel: InteractionModel;
   moodPrompt: string;
   createdAt: string;
   previewImage: string;
-  component: React.ComponentType<{ pulse: number }>;
+  component: ComponentType<WorldSceneProps>;
 }
 
 const LotusGateWorld = lazy(() => import('./chapters/chapter-001-lotus-gate/scene/LotusGateWorld').then((module) => ({ default: module.LotusGateWorld })));

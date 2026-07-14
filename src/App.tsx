@@ -1,17 +1,20 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Shell } from './components/Shell';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { HeroOverlay } from './components/HeroOverlay';
 import { ChapterRail } from './components/ChapterRail';
 import { Hud } from './components/Hud';
 import { ExperienceCanvas } from './experience/ExperienceCanvas';
-import { detectQualityTier } from './lib/performance';
+import { useQualityTier } from './lib/performance';
+import { canUseWebGL, useReducedMotion } from './lib/runtime';
 import { useUiStore } from './app/ui-store';
 import { useWorldStore } from './app/world-store';
-import { adjacentChapterId, chapterIdFromSearch } from './lib/navigation';
+import { adjacentChapterId } from './lib/navigation';
 
 function App() {
-  const qualityTier = detectQualityTier();
+  const qualityTier = useQualityTier();
+  const reducedMotion = useReducedMotion();
+  const [webglAvailable, setWebglAvailable] = useState(() => new URLSearchParams(window.location.search).get('webgl') !== 'off' && canUseWebGL());
   const entered = useUiStore((state) => state.entered);
   const immersive = useUiStore((state) => state.immersive);
   const enterWorld = useUiStore((state) => state.enterWorld);
@@ -20,10 +23,6 @@ function App() {
   const activeChapterId = useWorldStore((state) => state.activeChapterId);
   const setActiveChapter = useWorldStore((state) => state.setActiveChapter);
   const triggerPulse = useWorldStore((state) => state.triggerPulse);
-
-  useEffect(() => {
-    setActiveChapter(chapterIdFromSearch(window.location.search));
-  }, [setActiveChapter]);
 
   useEffect(() => {
     const url = new URL(window.location.href);
@@ -51,10 +50,10 @@ function App() {
   return (
     <Shell immersive={immersive}>
       <ErrorBoundary>
-        <ExperienceCanvas interactive={entered} qualityTier={qualityTier} />
+        <ExperienceCanvas interactive={entered} qualityTier={qualityTier} reducedMotion={reducedMotion} webglAvailable={webglAvailable} onContextLost={() => setWebglAvailable(false)} />
         <HeroOverlay entered={entered} onEnter={enterWorld} />
         <div className="chrome-layer">
-          <Hud activeChapterId={activeChapterId} immersive={immersive} qualityTier={qualityTier} onToggleImmersive={toggleImmersive} onPrevious={() => setActiveChapter(adjacentChapterId(activeChapterId, -1))} onNext={() => setActiveChapter(adjacentChapterId(activeChapterId, 1))} onPulse={triggerPulse} />
+          <Hud activeChapterId={activeChapterId} immersive={immersive} qualityTier={`${qualityTier}${reducedMotion ? ' · reduced motion' : ''}`} onToggleImmersive={toggleImmersive} onPrevious={() => setActiveChapter(adjacentChapterId(activeChapterId, -1))} onNext={() => setActiveChapter(adjacentChapterId(activeChapterId, 1))} onPulse={triggerPulse} />
           <ChapterRail activeChapterId={activeChapterId} onSelect={setActiveChapter} />
         </div>
       </ErrorBoundary>

@@ -7,20 +7,18 @@ import { AUTO_CAMERA_RESUME_MS, responsiveFov, spectatorFov } from '../camera/sp
 
 type MovementMode = 'orbit' | 'guided' | 'fixed' | 'free-fly';
 
-export function ExplorerControls({ mode, baseFov, enabled = true }: { mode: MovementMode; baseFov: number; enabled?: boolean }) {
+interface ExplorerControlsProps {
+  mode: MovementMode;
+  baseFov: number;
+  enabled?: boolean;
+  reducedMotion: boolean;
+}
+
+export function ExplorerControls({ mode, baseFov, enabled = true, reducedMotion }: ExplorerControlsProps) {
   const camera = useThree((state) => state.camera) as PerspectiveCamera;
   const size = useThree((state) => state.size);
   const [autoActive, setAutoActive] = useState(enabled);
-  const [reducedMotion, setReducedMotion] = useState(false);
   const resumeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  useEffect(() => {
-    const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const updatePreference = () => setReducedMotion(preference.matches);
-    updatePreference();
-    preference.addEventListener('change', updatePreference);
-    return () => preference.removeEventListener('change', updatePreference);
-  }, []);
 
   useEffect(() => {
     setAutoActive(enabled);
@@ -57,7 +55,7 @@ export function ExplorerControls({ mode, baseFov, enabled = true }: { mode: Move
       enabled={enabled}
       autoRotate={autoActive && !reducedMotion}
       autoRotateSpeed={0.32}
-      enableDamping
+      enableDamping={!reducedMotion}
       dampingFactor={0.06}
       enablePan={mode === 'free-fly'}
       enableRotate

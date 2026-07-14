@@ -102,6 +102,10 @@ Chapter URLs are shareable through `?chapter=<chapter-id>`, for example:
 
 The interface provides visible keyboard focus, touch-sized controls, safe-area-aware layout, reduced-motion behavior, and a readable recovery screen when WebGL initialization fails.
 
+Reduced motion applies to both CSS and WebGL: it switches to demand rendering and disables camera drift, autorotation, nonessential scene and particle motion, and post-processing. Quality reacts to viewport, orientation, and basic device capability: low tier removes reflections and shadows and reduces procedural density; medium reduces reflector resolution and DPR; high may lazy-load post-processing. See `docs/performance-budget.md` for budgets and the evidence procedure.
+
+Reuse and licensing boundaries are recorded in `docs/source-audit.md`, `docs/reuse-and-attribution.md`, and `LICENSE`.
+
 ## Repository structure
 
 ```text
