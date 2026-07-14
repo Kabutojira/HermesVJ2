@@ -1,0 +1,3 @@
+import type { CameraPreset } from '../../../experience/camera/cameraPresets';
+const cameraPreset: CameraPreset = { position: [0, 4.8, 14], target: [0, 3, 0], fov: 45 };
+export const solarChoirConfig = { id: 'chapter-004-solar-choir', title: 'Solar Choir', description: 'Seven orbital voices gather around a compact sun in a golden procession.', palette: ['#09070d', '#ffcc71', '#ff7da8', '#8ecbff'], movementMode: 'orbit' as const, qualityHint: 'medium' as const, cameraPreset, previewImage: '/social-preview.svg', createdAt: '2026-07-14T05:01:00Z', moodPrompt: 'compact ritual sun, orbital choir, gold and rose light in deep space' };

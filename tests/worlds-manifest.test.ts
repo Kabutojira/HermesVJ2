@@ -6,7 +6,8 @@ describe('world manifest', () => {
     expect(worldManifest.chapters.some((chapter) => chapter.id === worldManifest.latestChapterId)).toBe(true);
   });
 
-  it('contains at least two launch chapters', () => {
-    expect(worldManifest.chapters.length).toBeGreaterThanOrEqual(2);
+  it('contains the two launch chapters and five visual studies', () => {
+    expect(worldManifest.chapters).toHaveLength(7);
+    expect(new Set(worldManifest.chapters.map((chapter) => chapter.id)).size).toBe(7);
   });
 });

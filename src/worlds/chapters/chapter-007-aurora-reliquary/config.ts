@@ -1,0 +1,3 @@
+import type { CameraPreset } from '../../../experience/camera/cameraPresets';
+const cameraPreset: CameraPreset = { position: [0, 4.2, 12.5], target: [0, 2.8, 0], fov: 43 };
+export const auroraReliquaryConfig = { id: 'chapter-007-aurora-reliquary', title: 'Aurora Reliquary', description: 'A faceted relic holds a captive aurora inside ceremonial orbits.', palette: ['#050916', '#75ffd1', '#7fa7ff', '#ed9cff'], movementMode: 'orbit' as const, qualityHint: 'medium' as const, cameraPreset, previewImage: '/social-preview.svg', createdAt: '2026-07-14T05:04:00Z', moodPrompt: 'faceted aurora reliquary, teal violet light, sparse orbital cartography' };
