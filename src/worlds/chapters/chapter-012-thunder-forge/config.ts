@@ -1,0 +1,3 @@
+import type { CameraPreset } from '../../../experience/camera/cameraPresets';
+const cameraPreset: CameraPreset = { position: [0, 5, 15], target: [0, 2.8, 0], fov: 46 };
+export const thunderForgeConfig = { id: 'chapter-012-thunder-forge', title: 'Thunder Forge', description: 'A floating hammer ring tempers blue lightning with gold sparks.', palette: ['#060817', '#66d9ff', '#ffd36a', '#71582e'], movementMode: 'orbit' as const, qualityHint: 'high' as const, cameraPreset, previewImage: '/social-preview.svg', createdAt: '2026-07-14T06:34:00Z', moodPrompt: 'floating hammer ring, electric branches, blue and gold forge light' };

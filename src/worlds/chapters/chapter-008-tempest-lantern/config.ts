@@ -1,0 +1,3 @@
+import type { CameraPreset } from '../../../experience/camera/cameraPresets';
+const cameraPreset: CameraPreset = { position: [0, 4.8, 14], target: [0, 3.2, 0], fov: 45 };
+export const tempestLanternConfig = { id: 'chapter-008-tempest-lantern', title: 'Tempest Lantern', description: 'A charged lantern commands rain and branching sky-fire.', palette: ['#040814', '#79e8ff', '#eee9ff', '#445b91'], movementMode: 'orbit' as const, qualityHint: 'medium' as const, cameraPreset, previewImage: '/social-preview.svg', createdAt: '2026-07-14T06:30:00Z', moodPrompt: 'storm lantern, rain needles, branching lightning, white cyan radiance' };

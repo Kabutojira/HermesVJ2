@@ -2,10 +2,17 @@
 
 HermesVJ2 is an authored, browser-based dreamworld built with React, TypeScript, Three.js, and React Three Fiber. It is an independent, static-deployable experience designed for visual exploration and careful agent-driven iteration.
 
-The current world contains two chapters:
+The current world contains twelve chapters. Alongside the original landmarks and five visual studies, five elemental chapters extend the procedural world:
 
 - **Lotus Gate** — a luminous ceremonial threshold in a dark reflective field.
 - **Wormhole Spire** — a vertical cosmic landmark shaped by orbital motion and restrained bloom.
+- **Tempest Lantern** — rain, charged particles, and branching lightning around a strong ritual light.
+- **Cinder Sanctum** — procedural fire, sparks, and molten paths radiating from an obsidian hearth.
+- **Nebula Fountain** — eleven unique plasma arcs rising from a toroidal stellar well through particle mist.
+- **Frost Oracle** — snow streaks, an ice crown, and cold blue-white light.
+- **Thunder Forge** — electric branches and sparks around a floating hammer ring in gold and blue light.
+
+The intermediate Prism Orchard, Solar Choir, Tide Cathedral, Ember Loom, and Aurora Reliquary chapters remain available through the chapter rail and direct URLs.
 
 Production: **https://kabutojira.github.io/HermesVJ2/**
 
@@ -76,7 +83,7 @@ The production build defaults to the case-sensitive GitHub Pages base path `/Her
 npm run preview
 ```
 
-Then open `http://127.0.0.1:4173/HermesVJ2/` and smoke-test both chapters. For a root-hosted production build, override the base path:
+Then open `http://127.0.0.1:4173/HermesVJ2/` and smoke-test every changed chapter. For a root-hosted production build, override the base path:
 
 ```bash
 HERMESVJ2_BASE=/ npm run build
@@ -146,7 +153,7 @@ To deploy:
 
 1. Merge a reviewed change into `main`, or run **Actions → deploy-pages → Run workflow**.
 2. Wait for both the `build` and `deploy` jobs to pass.
-3. Open the production URL and verify both chapter query URLs, controls, and browser console.
+3. Open the production URL and verify the changed chapter query URLs, controls, and browser console.
 4. Confirm JavaScript, CSS, icons, and lazy chapter chunks load without 404s.
 
 Keep **Settings → Pages → Build and deployment → Source** set to **GitHub Actions**. The workflow intentionally uses only `pages: write` and `id-token: write` permissions.
