@@ -20,6 +20,11 @@ import { cometShipyardConfig } from './chapters/chapter-014-comet-shipyard/confi
 import { trinaryConfig } from './chapters/chapter-017-trinary-orrey/config';
 import { spiralGalaxyConfig } from './chapters/chapter-018-spiral-galaxy-sanctuary/config';
 import { deepSpaceConvergenceConfig } from './chapters/chapter-019-deep-space-convergence/config';
+import { saturnOrbitInsertionConfig } from './chapters/chapter-020-saturn-orbit-insertion/config';
+import { saturnRingsideDescentConfig } from './chapters/chapter-021-saturn-ringside-descent/config';
+import { saturnNightsidePlasmaConfig } from './chapters/chapter-022-saturn-nightside-plasma/config';
+import { saturnTerminatorCrossingConfig } from './chapters/chapter-023-saturn-terminator-crossing/config';
+import { saturnOrbitalDawnConfig } from './chapters/chapter-024-saturn-orbital-dawn/config';
 
 export interface WorldSceneProps {
   pulse: number;
@@ -59,6 +64,11 @@ const CometShipyardWorld = lazy(() => import('./chapters/chapter-014-comet-shipy
 const TrinaryWorld = lazy(() => import('./chapters/chapter-017-trinary-orrey/scene/TrinaryWorld').then((module) => ({ default: module.TrinaryWorld })));
 const SpiralGalaxyWorld = lazy(() => import('./chapters/chapter-018-spiral-galaxy-sanctuary/scene/SpiralGalaxyWorld').then((module) => ({ default: module.SpiralGalaxyWorld })));
 const DeepSpaceConvergenceWorld = lazy(() => import('./chapters/chapter-019-deep-space-convergence/scene/DeepSpaceConvergenceWorld').then((module) => ({ default: module.DeepSpaceConvergenceWorld })));
+const SaturnOrbitInsertionWorld = lazy(() => import('./chapters/chapter-020-saturn-orbit-insertion/scene/SaturnOrbitInsertionWorld').then((module) => ({ default: module.SaturnOrbitInsertionWorld })));
+const SaturnRingsideDescentWorld = lazy(() => import('./chapters/chapter-021-saturn-ringside-descent/scene/SaturnRingsideDescentWorld').then((module) => ({ default: module.SaturnRingsideDescentWorld })));
+const SaturnNightsidePlasmaWorld = lazy(() => import('./chapters/chapter-022-saturn-nightside-plasma/scene/SaturnNightsidePlasmaWorld').then((module) => ({ default: module.SaturnNightsidePlasmaWorld })));
+const SaturnTerminatorCrossingWorld = lazy(() => import('./chapters/chapter-023-saturn-terminator-crossing/scene/SaturnTerminatorCrossingWorld').then((module) => ({ default: module.SaturnTerminatorCrossingWorld })));
+const SaturnOrbitalDawnWorld = lazy(() => import('./chapters/chapter-024-saturn-orbital-dawn/scene/SaturnOrbitalDawnWorld').then((module) => ({ default: module.SaturnOrbitalDawnWorld })));
 
 export const chapters: WorldChapter[] = [
   { ...lotusGateConfig, component: LotusGateWorld, interactionModel: { primaryAction: 'Click to send a pulse through the gate halo.', ambientResponse: 'Petals drift and the orbital halo breathes around the gate.' } },
@@ -78,5 +88,10 @@ export const chapters: WorldChapter[] = [
   { ...trinaryConfig, component: TrinaryWorld, interactionModel: { primaryAction: 'Pulse the trinary orrery.', ambientResponse: 'Three suns and their planets advance through shared gravity.' } },
   { ...spiralGalaxyConfig, component: SpiralGalaxyWorld, interactionModel: { primaryAction: 'Pulse the spiral sanctuary.', ambientResponse: 'Layered stars brighten as the galactic congregation turns.' } },
   { ...deepSpaceConvergenceConfig, component: DeepSpaceConvergenceWorld, interactionModel: { primaryAction: 'Pulse the deep-space convergence.', ambientResponse: 'The pulsar beams, quasar jets, and spacecraft engine answer across the gulf.' } },
+  { ...saturnOrbitInsertionConfig, component: SaturnOrbitInsertionWorld, interactionModel: { primaryAction: 'Pulse the insertion plasma.', ambientResponse: 'The station spins through a brighter cyan bow shock above Saturn.' } },
+  { ...saturnRingsideDescentConfig, component: SaturnRingsideDescentWorld, interactionModel: { primaryAction: 'Pulse the ringside wake.', ambientResponse: 'Sunlight and plasma trace the station’s descent past the rings.' } },
+  { ...saturnNightsidePlasmaConfig, component: SaturnNightsidePlasmaWorld, interactionModel: { primaryAction: 'Pulse the nightside wake.', ambientResponse: 'Violet plasma reveals the station against Saturn’s dark hemisphere.' } },
+  { ...saturnTerminatorCrossingConfig, component: SaturnTerminatorCrossingWorld, interactionModel: { primaryAction: 'Pulse the terminator crossing.', ambientResponse: 'Amber plasma bridges Saturn’s warm day and blue night.' } },
+  { ...saturnOrbitalDawnConfig, component: SaturnOrbitalDawnWorld, interactionModel: { primaryAction: 'Pulse the orbital dawn.', ambientResponse: 'Rose plasma and first light catch the station above the rings.' } },
 ];
 export const chapterMap = Object.fromEntries(chapters.map((chapter) => [chapter.id, chapter])) as Record<string, WorldChapter>;

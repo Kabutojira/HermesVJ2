@@ -1,0 +1,3 @@
+import type { CameraPreset } from '../../../experience/camera/cameraPresets';
+const cameraPreset: CameraPreset = { position: [0.6, 5.2, 17], target: [0, 2, -1.5], fov: 48 };
+export const saturnTerminatorCrossingConfig = { id: 'chapter-023-saturn-terminator-crossing', title: 'Terminator Crossing', description: 'A giant station crosses Saturn’s day-night boundary, where warm sunlight and blue shadow split its spinning structure.', palette: ['#030610', '#ffb36f', '#151d32', '#c6aa78'], movementMode: 'orbit' as const, qualityHint: 'high' as const, cameraPreset, previewImage: '/social-preview.svg', createdAt: '2026-07-15T22:23:00Z', moodPrompt: 'Saturn terminator crossing, amber plasma, dramatic split lighting, gigantic orbital station' };
