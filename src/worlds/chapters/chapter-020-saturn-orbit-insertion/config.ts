@@ -1,0 +1,3 @@
+import type { CameraPreset } from '../../../experience/camera/cameraPresets';
+const cameraPreset: CameraPreset = { position: [0.4, 5, 16.5], target: [0, 1.9, -1.4], fov: 46 };
+export const saturnOrbitInsertionConfig = { id: 'chapter-020-saturn-orbit-insertion', title: 'Saturn Orbit Insertion', description: 'A colossal rotating station bites into Saturn’s upper exosphere, wrapped in a cyan plasma bow above the sunlit cloud bands.', palette: ['#030610', '#78ddff', '#151d32', '#c6aa78'], movementMode: 'orbit' as const, qualityHint: 'high' as const, cameraPreset, previewImage: '/social-preview.svg', createdAt: '2026-07-15T22:20:00Z', moodPrompt: 'day-side insertion, immense ring station, cyan plasma bow, realistic banded Saturn and rings' };

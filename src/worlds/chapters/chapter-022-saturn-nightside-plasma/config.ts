@@ -1,0 +1,3 @@
+import type { CameraPreset } from '../../../experience/camera/cameraPresets';
+const cameraPreset: CameraPreset = { position: [0.2, 4.8, 16.2], target: [0, 1.8, -1.6], fov: 46 };
+export const saturnNightsidePlasmaConfig = { id: 'chapter-022-saturn-nightside-plasma', title: 'Nightside Plasma Wake', description: 'Violet plasma reveals a rapidly rotating orbital station against Saturn’s dark hemisphere and a dense cold starfield.', palette: ['#030610', '#a486ff', '#151d32', '#c6aa78'], movementMode: 'orbit' as const, qualityHint: 'high' as const, cameraPreset, previewImage: '/social-preview.svg', createdAt: '2026-07-15T22:22:00Z', moodPrompt: 'Saturn nightside, violet plasma wake, rim-lit rotating station, sparse ceremonial stars' };

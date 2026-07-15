@@ -6,7 +6,7 @@ describe('world manifest', () => {
     expect(worldManifest.chapters.some((chapter) => chapter.id === worldManifest.latestChapterId)).toBe(true);
   });
 
-  it('publishes exactly the five requested space scenes after the existing chapters', () => {
+  it('preserves the five original space scenes after the first twelve chapters', () => {
     const expectedSpaceIds = [
       'chapter-013-event-horizon-gala',
       'chapter-014-comet-shipyard',
@@ -15,8 +15,8 @@ describe('world manifest', () => {
       'chapter-019-deep-space-convergence',
     ];
 
-    expect(worldManifest.chapters).toHaveLength(17);
-    expect(new Set(worldManifest.chapters.map((chapter) => chapter.id)).size).toBe(17);
-    expect(worldManifest.chapters.slice(12).map((chapter) => chapter.id)).toEqual(expectedSpaceIds);
+    expect(worldManifest.chapters).toHaveLength(22);
+    expect(new Set(worldManifest.chapters.map((chapter) => chapter.id)).size).toBe(22);
+    expect(worldManifest.chapters.slice(12, 17).map((chapter) => chapter.id)).toEqual(expectedSpaceIds);
   });
 });

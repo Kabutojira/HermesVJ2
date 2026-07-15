@@ -1,0 +1,3 @@
+import type { CameraPreset } from '../../../experience/camera/cameraPresets';
+const cameraPreset: CameraPreset = { position: [-0.4, 4.5, 16], target: [-0.1, 1.7, -1.8], fov: 46 };
+export const saturnOrbitalDawnConfig = { id: 'chapter-024-saturn-orbital-dawn', title: 'Orbital Dawn', description: 'The first rose light catches a fast-spinning station and its plasma sheath above Saturn’s night-side rings.', palette: ['#030610', '#f6b4ff', '#151d32', '#c6aa78'], movementMode: 'orbit' as const, qualityHint: 'high' as const, cameraPreset, previewImage: '/social-preview.svg', createdAt: '2026-07-15T22:24:00Z', moodPrompt: 'orbital dawn above Saturn, rose plasma, ring silhouette, rapidly spinning megastructure' };

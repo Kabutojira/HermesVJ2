@@ -1,0 +1,3 @@
+import type { CameraPreset } from '../../../experience/camera/cameraPresets';
+const cameraPreset: CameraPreset = { position: [-0.8, 4.6, 17.2], target: [0.2, 1.6, -1.8], fov: 48 };
+export const saturnRingsideDescentConfig = { id: 'chapter-021-saturn-ringside-descent', title: 'Ringside Descent', description: 'Saturn’s rings cut across a bright orbital vista as a huge spinning station descends through a pale plasma wake.', palette: ['#030610', '#b8efff', '#151d32', '#c6aa78'], movementMode: 'orbit' as const, qualityHint: 'high' as const, cameraPreset, previewImage: '/social-preview.svg', createdAt: '2026-07-15T22:21:00Z', moodPrompt: 'ringside low-orbit descent, sunlit Saturn, massive axial station, pale blue plasma' };
