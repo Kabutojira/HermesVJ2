@@ -2,7 +2,7 @@
 
 HermesVJ2 is an authored, browser-based dreamworld built with React, TypeScript, Three.js, and React Three Fiber. It is an independent, static-deployable experience designed for visual exploration and careful agent-driven iteration.
 
-The current world contains twelve chapters. Alongside the original landmarks and five visual studies, five elemental chapters extend the procedural world:
+The current world contains seventeen chapters. Alongside the original landmarks and five visual studies, five elemental chapters and five space chapters extend the procedural world:
 
 - **Lotus Gate** — a luminous ceremonial threshold in a dark reflective field.
 - **Wormhole Spire** — a vertical cosmic landmark shaped by orbital motion and restrained bloom.
@@ -11,6 +11,11 @@ The current world contains twelve chapters. Alongside the original landmarks and
 - **Nebula Fountain** — eleven unique plasma arcs rising from a toroidal stellar well through particle mist.
 - **Frost Oracle** — snow streaks, an ice crown, and cold blue-white light.
 - **Thunder Forge** — electric branches and sparks around a floating hammer ring in gold and blue light.
+- **Event Horizon Gala** — a gold-violet spiral gathering around a lightless gravitational heart.
+- **Comet Shipyard** — a ceremonial spacecraft escorting five luminous comets through deep space.
+- **Trinary Orrery** — three suns and their planets moving through a shared gravitational instrument.
+- **Spiral Galaxy Sanctuary** — a dense, many-colored spiral galaxy turning around a radiant heart.
+- **Deep-Space Convergence** — a pulsar, quasar, and spacecraft answering across a shared cosmic gulf.
 
 The intermediate Prism Orchard, Solar Choir, Tide Cathedral, Ember Loom, and Aurora Reliquary chapters remain available through the chapter rail and direct URLs.
 

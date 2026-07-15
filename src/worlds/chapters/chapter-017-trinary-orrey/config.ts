@@ -1,0 +1,3 @@
+import type { CameraPreset } from '../../../experience/camera/cameraPresets';
+const cameraPreset: CameraPreset = { position: [0, 6, 17], target: [0, 2.4, 0], fov: 48 };
+export const trinaryConfig = { id: 'chapter-017-trinary-orrey', title: 'Trinary Orrery', description: 'Three rotating suns hold a clockwork family of planets in shared gravity.', palette: ['#050713', '#ffcb70', '#76dfff', '#ff739c'], movementMode: 'orbit' as const, qualityHint: 'high' as const, cameraPreset, previewImage: '/social-preview.svg', createdAt: '2026-07-14T16:52:00Z', moodPrompt: 'three-star solar system, rotating planets, orbital gravity diagram' };

@@ -1,0 +1,3 @@
+import type { CameraPreset } from '../../../experience/camera/cameraPresets';
+const cameraPreset: CameraPreset = { position: [1, 5, 16], target: [0, 2.7, 0], fov: 48 };
+export const cometShipyardConfig = { id: 'chapter-014-comet-shipyard', title: 'Comet Shipyard', description: 'A ceremonial spacecraft escorts five luminous comets through a deep-space shipyard.', palette: ['#050915', '#8be9ff', '#ff9ad5', '#243b5a'], movementMode: 'orbit' as const, qualityHint: 'medium' as const, cameraPreset, previewImage: '/social-preview.svg', createdAt: '2026-07-14T16:49:00Z', moodPrompt: 'comet convoy, geometric spacecraft, cyan and rose ion trails, deep space' };

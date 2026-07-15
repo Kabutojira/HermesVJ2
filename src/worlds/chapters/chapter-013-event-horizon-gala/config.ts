@@ -1,0 +1,3 @@
+import type { CameraPreset } from '../../../experience/camera/cameraPresets';
+const cameraPreset: CameraPreset = { position: [0, 5.5, 16], target: [0, 2.4, 0], fov: 47 };
+export const eventHorizonConfig = { id: 'chapter-013-event-horizon-gala', title: 'Event Horizon Gala', description: 'A spiral galaxy performs a gold-violet gala around a lightless gravitational heart.', palette: ['#020106', '#ffbd66', '#a884ff', '#33134f'], movementMode: 'guided' as const, qualityHint: 'high' as const, cameraPreset, previewImage: '/social-preview.svg', createdAt: '2026-07-14T16:48:00Z', moodPrompt: 'spiral galaxy gala, gravitational lens, black hole, restrained gold and violet light' };
