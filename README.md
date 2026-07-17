@@ -148,12 +148,16 @@ Read `AGENTS.md` before contributing. Agents must also load `hermes/skills/herme
 
 1. Start from the chapter brief under `src/worlds/chapters/<chapter-id>/prompts/brief.md`.
 2. Keep chapter-owned geometry, animation, and constants inside that chapter.
-3. Register the chapter through a typed config and lazy import in `src/worlds/registry.ts`.
+3. Export a typed, lazy `chapter` from `<chapter-id>/module.ts`; the renderer discovers it without a central registry edit. See `docs/architecture/rendering-foundation.md` for the exact interface.
 4. Keep chapter IDs stable because they are part of shareable URLs.
 5. Add or update tests and run the full validation sequence above.
 6. Preview every registered chapter after changing shared camera, controls, environment, lighting, or post-processing.
 
 Prefer original procedural geometry. External assets must have a verified license compatible with distribution, be optimized before commit, and have their source, author, license, and modifications recorded. Do not copy source code or assets from `hermesvj`, and do not introduce unversioned runtime asset URLs.
+
+The shared renderer, lifecycle, quality gates, environment/lighting requests, controls, and optional official Three.js post-processing pipeline are documented in `docs/architecture/rendering-foundation.md`. Chapters must consume that foundation rather than creating renderers, composers, resize handlers, or animation loops.
+
+The shared renderer, lifecycle, quality gates, environment/lighting requests, controls, and optional official Three.js post-processing pipeline are documented in `docs/architecture/rendering-foundation.md`. Chapters must consume that foundation rather than creating renderers, composers, resize handlers, or animation loops.
 
 ## Deployment
 

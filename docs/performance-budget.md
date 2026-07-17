@@ -13,11 +13,15 @@ The tier updates on resize and orientation change and considers viewport width, 
 
 | Tier | Selection | DPR | Shadows | Reflector | Scene density | Post FX |
 | --- | --- | --- | --- | --- | --- | --- |
-| low | width <640px or <=4 logical CPUs | 1 | off | replaced by standard material | 25–50% particles/segments | not downloaded |
-| medium | width <1200px or DPR >2 | <=1.5 | on | 512 px | 60–75% | not downloaded |
-| high | capable wide display | <=2 | on | 1024 px | full | lazy-loaded |
+| low | width <640px or <=4 logical CPUs | 1, AA off | off | disabled | 25–50% particles/segments | not downloaded |
+| medium | width <1200px or DPR >2 | <=1.5, AA on | on, 1024 map | <=512 px | 60–75% | not downloaded |
+| high | capable wide display | <=2, AA on | on, 2048 map | <=1024 px | full | opt-in and lazy-loaded |
 
 `prefers-reduced-motion` changes the canvas to demand rendering, disables camera drift and guided autorotation, freezes nonessential scene and particle animation, and disables post-processing. Pointer and keyboard navigation remain available.
+
+The renderer passes these limits to every chapter as `WorldSceneProps.capabilities`. A zero reflection or water size is a hard gate: the scene must not construct that resource. High tier only permits post-processing; the chapter must still request individual passes. Reflection, water, bloom, and depth of field have no global default.
+
+The renderer passes these limits to every chapter as `WorldSceneProps.capabilities`. A zero reflection or water size is a hard gate: the scene must not construct that resource. High tier only permits post-processing; the chapter must still request individual passes. Reflection, water, bloom, and depth of field have no global default.
 
 ## Evidence procedure
 

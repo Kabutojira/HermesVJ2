@@ -7,11 +7,11 @@ Research checked 2026-07-16 against the official Three.js documentation and exam
 ## Repository fit
 
 - Stack: React 19, TypeScript 6, Vite 8, React Three Fiber (R3F) 9, and one shared `<Canvas>` in `src/experience/ExperienceCanvas.tsx`.
-- Existing scene contract: lazy chapter components receive `{ pulse, qualityTier, reducedMotion }` through `WorldSceneProps` in `src/worlds/registry.ts`. Camera metadata is `{ position, target, fov }`; movement is `orbit`, `guided`, or `free-fly`.
+- Existing scene contract: lazy chapter components receive `{ pulse, qualityTier, reducedMotion, capabilities }` through `WorldSceneProps` in `src/worlds/registry.ts`. Camera metadata is `{ position, target, fov }`; movement is `orbit`, `guided`, or `free-fly`.
 - Existing quality policy: low DPR 1/no shadows/no post; medium DPR <=1.5/shadows/no post; high DPR <=2/shadows/lazy post. Reduced motion uses demand rendering and disables post-processing.
-- Existing post stack: `src/experience/post/WorldPostFX.tsx` uses `@react-three/postprocessing` for bloom, noise, chromatic aberration, and vignette. Do not add a second composer or render loop inside a chapter. Any migration to official Three.js passes belongs in the shared `src/experience/post` owner.
+- Existing post stack: `src/experience/post/WorldPostFX.tsx` now owns official `three/addons` passes (render, optional bloom/DOF, final output) after the shared-foundation implementation. Do not add a second composer or render loop inside a chapter.
 - Assets are effectively procedural: `public/` has interface/social SVGs, while chapter scenes generate their geometry and textures. There is no local HDR environment, PBR texture set, or glTF model to reuse. A new HDRI, normal map, or model must be local, optimized, licensed, and recorded in `docs/assets.md` as required by `AGENTS.md`.
-- Current architecture applies shared stars, sky, fog, ground, and lighting to every chapter. A realistic-scene implementation must make those systems configurable rather than stacking contradictory chapter-local skies/lights over them.
+- Shared stars, sky, fog, ground, and lighting are now declarative per-chapter requests with conservative defaults; scenes should disable or tune them instead of stacking contradictory chapter-local systems.
 
 ## Version and import compatibility
 
@@ -114,7 +114,8 @@ import type { WorldSceneProps } from '../../../registry';
 
 export function NameWorld({ pulse, qualityTier, reducedMotion }: WorldSceneProps) {
   // useMemo for generated arrays/geometries; useFrame mutates refs/uniforms only.
-  // qualityTier selects fixed budgets; reducedMotion freezes nonessential motion.
+  // capabilities carries hard renderer/shadow/reflection/water/post budgets.
+  // qualityTier selects fixed density budgets; reducedMotion freezes nonessential motion.
   // effects remain requests/config at the shared ExperienceCanvas owner.
   return <group>{/* one dominant subject and three depth bands */}</group>;
 }
