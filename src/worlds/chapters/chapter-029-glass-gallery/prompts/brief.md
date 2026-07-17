@@ -1,0 +1,3 @@
+# Vitreous Salon
+
+One faceted glass pavilion anchors a quiet stone hall, framed by a tiered number of columns and warm ceiling luminaires. Medium/high use plausible transmitted glass (IOR 1.5, finite thickness, modest roughness) shaped by a one-frame procedural room environment and reflected cool/warm architectural luminaires; low never constructs that environment and keeps an inexpensive transparent standard-material fallback. Soft shadows and a narrow architectural orbit preserve human scale. The pulse moves only through the seam light. There is no water, planar mirror, remote HDRI, continuously updated cube capture, or local composer.

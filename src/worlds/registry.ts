@@ -1,8 +1,11 @@
 import type { CameraPreset } from '../experience/camera/cameraPresets';
+import type { RenderCapabilities } from '../experience/rendering/quality';
+import type { SceneRenderingRequest } from '../experience/rendering/types';
 import type { QualityTier } from '../lib/performance';
 import type { MovementMode } from './shared/biomeTypes';
 import type { InteractionModel } from './shared/interactionTypes';
 import { lazy, type ComponentType } from 'react';
+import { collectSceneModules, type SceneModule } from './module-loader';
 import { lotusGateConfig } from './chapters/chapter-001-lotus-gate/config';
 import { wormholeSpireConfig } from './chapters/chapter-002-wormhole-spire/config';
 import { prismOrchardConfig } from './chapters/chapter-003-prism-orchard/config';
@@ -30,6 +33,7 @@ export interface WorldSceneProps {
   pulse: number;
   qualityTier: QualityTier;
   reducedMotion: boolean;
+  capabilities: RenderCapabilities;
 }
 
 export interface WorldChapter {
@@ -45,6 +49,7 @@ export interface WorldChapter {
   createdAt: string;
   previewImage: string;
   component: ComponentType<WorldSceneProps>;
+  rendering?: SceneRenderingRequest;
 }
 
 const LotusGateWorld = lazy(() => import('./chapters/chapter-001-lotus-gate/scene/LotusGateWorld').then((module) => ({ default: module.LotusGateWorld })));
@@ -70,7 +75,7 @@ const SaturnNightsidePlasmaWorld = lazy(() => import('./chapters/chapter-022-sat
 const SaturnTerminatorCrossingWorld = lazy(() => import('./chapters/chapter-023-saturn-terminator-crossing/scene/SaturnTerminatorCrossingWorld').then((module) => ({ default: module.SaturnTerminatorCrossingWorld })));
 const SaturnOrbitalDawnWorld = lazy(() => import('./chapters/chapter-024-saturn-orbital-dawn/scene/SaturnOrbitalDawnWorld').then((module) => ({ default: module.SaturnOrbitalDawnWorld })));
 
-export const chapters: WorldChapter[] = [
+const legacyChapters: WorldChapter[] = [
   { ...lotusGateConfig, component: LotusGateWorld, interactionModel: { primaryAction: 'Click to send a pulse through the gate halo.', ambientResponse: 'Petals drift and the orbital halo breathes around the gate.' } },
   { ...wormholeSpireConfig, component: WormholeSpireWorld, interactionModel: { primaryAction: 'Click to energize the wormhole spire.', ambientResponse: 'The field bends around the central signal.' } },
   { ...prismOrchardConfig, component: PrismOrchardWorld, interactionModel: { primaryAction: 'Pulse the crystal crown.', ambientResponse: 'Prismatic paths turn through the orchard.' } },
@@ -94,4 +99,12 @@ export const chapters: WorldChapter[] = [
   { ...saturnTerminatorCrossingConfig, component: SaturnTerminatorCrossingWorld, interactionModel: { primaryAction: 'Pulse the terminator crossing.', ambientResponse: 'Amber plasma bridges Saturn’s warm day and blue night.' } },
   { ...saturnOrbitalDawnConfig, component: SaturnOrbitalDawnWorld, interactionModel: { primaryAction: 'Pulse the orbital dawn.', ambientResponse: 'Rose plasma and first light catch the station above the rings.' } },
 ];
+const discoveredModules = import.meta.glob<SceneModule<WorldChapter>>('./chapters/*/module.ts', { eager: true });
+const discoveredChapters = collectSceneModules(discoveredModules);
+const legacyIds = new Set(legacyChapters.map((chapter) => chapter.id));
+for (const chapter of discoveredChapters) {
+  if (legacyIds.has(chapter.id)) throw new Error(`Duplicate scene id: ${chapter.id}`);
+}
+
+export const chapters: WorldChapter[] = [...legacyChapters, ...discoveredChapters];
 export const chapterMap = Object.fromEntries(chapters.map((chapter) => [chapter.id, chapter])) as Record<string, WorldChapter>;

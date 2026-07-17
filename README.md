@@ -2,7 +2,7 @@
 
 HermesVJ2 is an authored, browser-based dreamworld built with React, TypeScript, Three.js, and React Three Fiber. It is an independent, static-deployable experience designed for visual exploration and careful agent-driven iteration.
 
-The current world contains twenty-two chapters. Alongside the original landmarks and visual studies, five elemental chapters, five deep-space chapters, and five low-Saturn-orbit visuals extend the procedural world:
+The current world contains twenty-seven chapters. Alongside the original landmarks and visual studies, five elemental chapters, five deep-space chapters, five low-Saturn-orbit visuals, and five realistic environment studies extend the procedural world:
 
 - **Lotus Gate** — a luminous ceremonial threshold in a dark reflective field.
 - **Wormhole Spire** — a vertical cosmic landmark shaped by orbital motion and restrained bloom.
@@ -21,6 +21,11 @@ The current world contains twenty-two chapters. Alongside the original landmarks
 - **Nightside Plasma Wake** — violet particles tracing the fast-spinning station against Saturn’s dark hemisphere.
 - **Terminator Crossing** — warm and cold light splitting the station at Saturn’s day-night boundary.
 - **Orbital Dawn** — rose light catching the station and its plasma sheath above the night-side rings.
+- **Sunlit Canyon** — a wide sandstone passage shaped by dry haze, stratified walls, and natural light.
+- **Monolith Studio** — a sculpted metal hero object lit by restrained softboxes in a charcoal product studio.
+- **Neon Rain Crossing** — a ceremonial transit tower reflected only in broken, rain-dark pavement.
+- **Aureate Divide** — a split alpine summit beyond a calm, physically motivated golden-hour lake.
+- **Vitreous Salon** — a faceted glass pavilion defined by architectural light and controlled room reflections.
 
 The intermediate Prism Orchard, Solar Choir, Tide Cathedral, Ember Loom, and Aurora Reliquary chapters remain available through the chapter rail and direct URLs.
 
@@ -148,12 +153,16 @@ Read `AGENTS.md` before contributing. Agents must also load `hermes/skills/herme
 
 1. Start from the chapter brief under `src/worlds/chapters/<chapter-id>/prompts/brief.md`.
 2. Keep chapter-owned geometry, animation, and constants inside that chapter.
-3. Register the chapter through a typed config and lazy import in `src/worlds/registry.ts`.
+3. Export a typed, lazy `chapter` from `<chapter-id>/module.ts`; the renderer discovers it without a central registry edit. See `docs/architecture/rendering-foundation.md` for the exact interface.
 4. Keep chapter IDs stable because they are part of shareable URLs.
 5. Add or update tests and run the full validation sequence above.
 6. Preview every registered chapter after changing shared camera, controls, environment, lighting, or post-processing.
 
 Prefer original procedural geometry. External assets must have a verified license compatible with distribution, be optimized before commit, and have their source, author, license, and modifications recorded. Do not copy source code or assets from `hermesvj`, and do not introduce unversioned runtime asset URLs.
+
+The shared renderer, lifecycle, quality gates, environment/lighting requests, controls, and optional official Three.js post-processing pipeline are documented in `docs/architecture/rendering-foundation.md`. Chapters must consume that foundation rather than creating renderers, composers, resize handlers, or animation loops.
+
+The shared renderer, lifecycle, quality gates, environment/lighting requests, controls, and optional official Three.js post-processing pipeline are documented in `docs/architecture/rendering-foundation.md`. Chapters must consume that foundation rather than creating renderers, composers, resize handlers, or animation loops.
 
 ## Deployment
 

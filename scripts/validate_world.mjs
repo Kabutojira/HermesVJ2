@@ -20,4 +20,16 @@ if (chapterDirs.length < 2) {
   throw new Error(`expected at least 2 chapter directories, found ${chapterDirs.length}`);
 }
 
-console.log(`Validated ${chapterDirs.length} chapter directories and registry launch entries.`);
+for (const chapterDir of chapterDirs) {
+  const modulePath = join(chaptersDir.pathname, chapterDir, 'module.ts');
+  try {
+    const moduleSource = readFileSync(modulePath, 'utf8');
+    if (!/export\s+const\s+chapter\s*=/.test(moduleSource) || !moduleSource.includes('satisfies WorldChapter')) {
+      throw new Error(`${chapterDir}/module.ts must export const chapter satisfying WorldChapter`);
+    }
+  } catch (error) {
+    if (error?.code !== 'ENOENT') throw error;
+  }
+}
+
+console.log(`Validated ${chapterDirs.length} chapter directories, registry launch entries, and discovered scene modules.`);

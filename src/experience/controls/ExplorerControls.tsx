@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { MathUtils, PerspectiveCamera } from 'three';
 
 import { AUTO_CAMERA_RESUME_MS, responsiveFov, spectatorFov } from '../camera/spectatorCamera';
+import type { SceneControlsRequest } from '../rendering/types';
 
 type MovementMode = 'orbit' | 'guided' | 'fixed' | 'free-fly';
 
@@ -12,9 +13,10 @@ interface ExplorerControlsProps {
   baseFov: number;
   enabled?: boolean;
   reducedMotion: boolean;
+  request?: SceneControlsRequest;
 }
 
-export function ExplorerControls({ mode, baseFov, enabled = true, reducedMotion }: ExplorerControlsProps) {
+export function ExplorerControls({ mode, baseFov, enabled = true, reducedMotion, request }: ExplorerControlsProps) {
   const camera = useThree((state) => state.camera) as PerspectiveCamera;
   const size = useThree((state) => state.size);
   const [autoActive, setAutoActive] = useState(enabled);
@@ -59,11 +61,11 @@ export function ExplorerControls({ mode, baseFov, enabled = true, reducedMotion 
       dampingFactor={0.06}
       enablePan={mode === 'free-fly'}
       enableRotate
-      minDistance={5}
-      maxDistance={18}
-      minPolarAngle={0.35}
-      maxPolarAngle={Math.PI / 2.02}
-      target={[0, 2.3, 0]}
+      minDistance={request?.minDistance ?? 5}
+      maxDistance={request?.maxDistance ?? 18}
+      minPolarAngle={request?.minPolarAngle ?? 0.35}
+      maxPolarAngle={request?.maxPolarAngle ?? Math.PI / 2.02}
+      target={request?.target ?? [0, 2.3, 0]}
       onStart={stopAutomaticCamera}
       onEnd={scheduleAutomaticCamera}
     />

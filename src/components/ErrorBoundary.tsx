@@ -1,12 +1,16 @@
 import type { ErrorInfo, ReactNode } from 'react';
 import { Component } from 'react';
 
-interface ErrorBoundaryProps { children: ReactNode; }
-interface ErrorBoundaryState { hasError: boolean; }
+interface ErrorBoundaryProps { children: ReactNode; resetKey?: string; }
+interface ErrorBoundaryState { hasError: boolean; resetKey?: string; }
 
 export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
-  state: ErrorBoundaryState = { hasError: false };
+  state: ErrorBoundaryState = { hasError: false, resetKey: this.props.resetKey };
   static getDerivedStateFromError() { return { hasError: true }; }
+  static getDerivedStateFromProps(props: ErrorBoundaryProps, state: ErrorBoundaryState) {
+    if (props.resetKey !== state.resetKey) return { hasError: false, resetKey: props.resetKey };
+    return null;
+  }
   componentDidCatch(error: Error, info: ErrorInfo) { console.error('HermesVJ2 render error', error, info); }
 
   render() {

@@ -34,7 +34,7 @@ UI remains a thin accessible DOM layer above the canvas: title/lore, chapter rai
 ## Chosen stack and build contract
 
 - Node 20+, npm, Vite, React, and strict TypeScript.
-- Three.js through `@react-three/fiber`; `@react-three/drei` for proven helpers; `@react-three/postprocessing` for a tightly budgeted effects chain.
+- Three.js through `@react-three/fiber`; `@react-three/drei` for proven scene helpers; official `three/addons` passes for a tightly budgeted shared effects chain.
 - Zustand for serializable UI/world state; React state is not updated per frame.
 - Vitest + Testing Library for registry, stores, control contracts and DOM UI. Playwright is the later smoke/visual-regression layer.
 - ESLint/Oxlint plus `tsc --noEmit`; no backend, SSR, database, CMS, remote executable content, or required runtime API.

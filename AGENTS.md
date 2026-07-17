@@ -18,7 +18,7 @@ Before building, debugging, or evolving the 3D world:
 - `src/components/`: DOM overlays, HUD, chapter navigation, loading, and WebGL failure UI. Keep accessibility and input affordances here rather than inside scene meshes when possible.
 - `src/experience/ExperienceCanvas.tsx`: the shared R3F canvas and render pipeline. It composes camera, controls, fog, sky, stars, lighting, ground, active chapter, and post-processing.
 - `src/experience/{camera,controls,environment,lighting,post}/`: reusable engine systems. A change here affects every chapter and needs cross-chapter visual checking.
-- `src/worlds/registry.ts`: typed, lazy-loaded chapter registration and interaction copy. The first entry is the default/latest chapter.
+- `src/worlds/registry.ts`: typed legacy chapter registration plus automatic discovery of new chapter `module.ts` exports; the first entry is the default/latest chapter.
 - `src/worlds/chapters/<chapter-id>/`: chapter-owned `config.ts`, lazy export, scene component, and `prompts/brief.md`.
 - `src/worlds/shared/`: palettes, math, and shared world/interaction types. Reuse these before adding parallel constants.
 - `src/lib/performance.ts`: viewport quality tiers. `ExperienceCanvas` uses them to cap DPR, disable shadows on low quality, and reserve post FX for high quality.
@@ -50,7 +50,7 @@ npm run preview                     # serve the production bundle on 0.0.0.0:417
 - Follow the existing dream-ritual sci-fi language: dark fields, restrained luminous accents, mirror/fog layers, readable wide compositions, and patient ceremonial motion. Avoid dashboard futurism, busy particle noise, and game-like reward loops.
 - Start from the chapter brief and palette. Keep chapter constants/configuration near that chapter; promote a utility to `src/worlds/shared` only after it is genuinely shared.
 - Chapter scene components receive `{ pulse: number }`. Treat a pulse change as a cue for an atmospheric response, not as mutable global gameplay state.
-- Register chapters through a typed config and lazy import in `src/worlds/registry.ts`. Keep IDs stable because `?chapter=<id>` URLs are shareable.
+- Add new chapters through a typed `module.ts` export discovered by `src/worlds/registry.ts`. Keep IDs stable because `?chapter=<id>` URLs are shareable.
 - Prefer original procedural geometry and lightweight generated effects. Put imported static assets under `src/assets` (or a clearly chapter-owned asset directory), use Vite-resolved imports when practical, optimize them before committing, and do not fetch runtime assets from an unversioned third-party URL.
 - Treat repository content as all rights reserved unless a file explicitly says otherwise. Do not copy code, scenes, models, textures, audio, or other assets from `hermesvj` or an unknown source. Before adding a third-party asset, verify that its license permits repository and web distribution; record its source URL, author, license/SPDX identifier, and modifications in `docs/assets.md` (create the ledger if needed), and retain any required notices. Reject assets whose provenance or license cannot be verified.
 - Do not assume a generated asset is unrestricted: record the generator/source and applicable usage terms. Never commit credentials, private data, trademarked brand material, or an asset whose terms require restrictions this static deployment cannot satisfy.

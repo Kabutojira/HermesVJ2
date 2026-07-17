@@ -49,14 +49,14 @@ function App() {
 
   return (
     <Shell immersive={immersive}>
-      <ErrorBoundary>
+      <ErrorBoundary resetKey={activeChapterId}>
         <ExperienceCanvas interactive={entered} qualityTier={qualityTier} reducedMotion={reducedMotion} webglAvailable={webglAvailable} onContextLost={() => setWebglAvailable(false)} />
-        <HeroOverlay entered={entered} onEnter={enterWorld} />
-        <div className="chrome-layer">
-          <Hud activeChapterId={activeChapterId} immersive={immersive} qualityTier={`${qualityTier}${reducedMotion ? ' · reduced motion' : ''}`} onToggleImmersive={toggleImmersive} onPrevious={() => setActiveChapter(adjacentChapterId(activeChapterId, -1))} onNext={() => setActiveChapter(adjacentChapterId(activeChapterId, 1))} onPulse={triggerPulse} />
-          <ChapterRail activeChapterId={activeChapterId} onSelect={setActiveChapter} />
-        </div>
       </ErrorBoundary>
+      <HeroOverlay entered={entered} onEnter={enterWorld} />
+      <div className="chrome-layer">
+        <Hud activeChapterId={activeChapterId} immersive={immersive} qualityTier={`${qualityTier}${reducedMotion ? ' · reduced motion' : ''}`} onToggleImmersive={toggleImmersive} onPrevious={() => setActiveChapter(adjacentChapterId(activeChapterId, -1))} onNext={() => setActiveChapter(adjacentChapterId(activeChapterId, 1))} onPulse={triggerPulse} />
+        <ChapterRail activeChapterId={activeChapterId} onSelect={setActiveChapter} />
+      </div>
     </Shell>
   );
 }
