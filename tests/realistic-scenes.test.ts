@@ -1,11 +1,14 @@
-import { describe, expect, it } from 'vitest';
+import { readFileSync } from 'node:fs';
+import { describe, expect, it, vi } from 'vitest';
 
-import { neonCityConfig } from '../src/worlds/chapters/chapter-025-neon-rain-city/config';
-import { cityBudget, createCityBlocks, createRain } from '../src/worlds/chapters/chapter-025-neon-rain-city/scene/cityData';
-import { mountainLakeConfig } from '../src/worlds/chapters/chapter-026-golden-mountain-lake/config';
-import { lakeBudget, shouldUseWater } from '../src/worlds/chapters/chapter-026-golden-mountain-lake/scene/lakeData';
-import { glassGalleryConfig } from '../src/worlds/chapters/chapter-027-glass-gallery/config';
-import { galleryBudget, shouldUsePhysicalGlass } from '../src/worlds/chapters/chapter-027-glass-gallery/scene/galleryData';
+import { disposeSceneResources } from '../src/experience/rendering/resources';
+
+import { neonCityConfig } from '../src/worlds/chapters/chapter-027-neon-rain-city/config';
+import { cityBudget, createCityBlocks, createRain } from '../src/worlds/chapters/chapter-027-neon-rain-city/scene/cityData';
+import { mountainLakeConfig } from '../src/worlds/chapters/chapter-028-golden-mountain-lake/config';
+import { lakeBudget, shouldUseWater } from '../src/worlds/chapters/chapter-028-golden-mountain-lake/scene/lakeData';
+import { glassGalleryConfig } from '../src/worlds/chapters/chapter-029-glass-gallery/config';
+import { galleryBudget, shouldUsePhysicalGlass } from '../src/worlds/chapters/chapter-029-glass-gallery/scene/galleryData';
 
 const configs = [neonCityConfig, mountainLakeConfig, glassGalleryConfig];
 
@@ -29,6 +32,19 @@ describe('city, lake, and gallery scene contracts', () => {
     expect(createCityBlocks(12, 99)).toEqual(createCityBlocks(12, 99));
     expect(createCityBlocks(12, 99)).not.toEqual(createCityBlocks(12, 100));
     expect(createRain(12)).toHaveLength(12 * 2 * 3);
+  });
+
+  it('uses a disposable PBR water surface instead of an unmanaged reflection render target', () => {
+    const lakeSource = readFileSync(
+      'src/worlds/chapters/chapter-028-golden-mountain-lake/scene/GoldenMountainLakeWorld.tsx',
+      'utf8',
+    );
+    const normalTexture = { dispose: vi.fn() };
+
+    expect(lakeSource).not.toMatch(/three\/addons\/objects\/Water/);
+    expect(lakeSource).toContain('useSceneResources');
+    disposeSceneResources([normalTexture]);
+    expect(normalTexture.dispose).toHaveBeenCalledOnce();
   });
 
   it('hard-gates advanced water and glass paths while retaining fallbacks', () => {

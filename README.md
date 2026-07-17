@@ -2,7 +2,7 @@
 
 HermesVJ2 is an authored, browser-based dreamworld built with React, TypeScript, Three.js, and React Three Fiber. It is an independent, static-deployable experience designed for visual exploration and careful agent-driven iteration.
 
-The current world contains twenty-two chapters. Alongside the original landmarks and visual studies, five elemental chapters, five deep-space chapters, and five low-Saturn-orbit visuals extend the procedural world:
+The current world contains twenty-seven chapters. Alongside the original landmarks and visual studies, five elemental chapters, five deep-space chapters, five low-Saturn-orbit visuals, and five realistic environment studies extend the procedural world:
 
 - **Lotus Gate** — a luminous ceremonial threshold in a dark reflective field.
 - **Wormhole Spire** — a vertical cosmic landmark shaped by orbital motion and restrained bloom.
@@ -21,6 +21,11 @@ The current world contains twenty-two chapters. Alongside the original landmarks
 - **Nightside Plasma Wake** — violet particles tracing the fast-spinning station against Saturn’s dark hemisphere.
 - **Terminator Crossing** — warm and cold light splitting the station at Saturn’s day-night boundary.
 - **Orbital Dawn** — rose light catching the station and its plasma sheath above the night-side rings.
+- **Sunlit Canyon** — a wide sandstone passage shaped by dry haze, stratified walls, and natural light.
+- **Monolith Studio** — a sculpted metal hero object lit by restrained softboxes in a charcoal product studio.
+- **Neon Rain Crossing** — a ceremonial transit tower reflected only in broken, rain-dark pavement.
+- **Aureate Divide** — a split alpine summit beyond a calm, physically motivated golden-hour lake.
+- **Vitreous Salon** — a faceted glass pavilion defined by architectural light and controlled room reflections.
 
 The intermediate Prism Orchard, Solar Choir, Tide Cathedral, Ember Loom, and Aurora Reliquary chapters remain available through the chapter rail and direct URLs.
 

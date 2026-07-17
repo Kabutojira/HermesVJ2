@@ -1,7 +1,7 @@
 import type { WorldChapter } from '../../registry';
 
 export const glassGalleryConfig = {
-  id: 'chapter-027-glass-gallery',
+  id: 'chapter-029-glass-gallery',
   title: 'Vitreous Salon',
   description: 'A faceted glass pavilion rests inside a quiet stone salon, shaped by architectural light, soft shadow, and controlled room reflections.',
   palette: ['#090b10', '#f2e6cf', '#2d3035', '#9fd5db'],

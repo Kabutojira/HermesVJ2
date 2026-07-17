@@ -1,7 +1,7 @@
 import type { WorldChapter } from '../../registry';
 
 export const mountainLakeConfig = {
-  id: 'chapter-026-golden-mountain-lake',
+  id: 'chapter-028-golden-mountain-lake',
   title: 'Aureate Divide',
   description: 'A calm alpine lake leads toward a split granite summit as the low sun warms snow, stone, and a single reflective water surface.',
   palette: ['#101921', '#f6c879', '#24434b', '#dce7e4'],

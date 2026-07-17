@@ -6,6 +6,20 @@ describe('world manifest', () => {
     expect(worldManifest.chapters.some((chapter) => chapter.id === worldManifest.latestChapterId)).toBe(true);
   });
 
+  it('integrates exactly five sequential realistic scenes with normalized metadata', () => {
+    const expectedScenes = [
+      ['chapter-025-sunlit-canyon', 'Sunlit Canyon'],
+      ['chapter-026-cinematic-product-studio', 'Monolith Studio'],
+      ['chapter-027-neon-rain-city', 'Neon Rain Crossing'],
+      ['chapter-028-golden-mountain-lake', 'Aureate Divide'],
+      ['chapter-029-glass-gallery', 'Vitreous Salon'],
+    ];
+    const integratedScenes = worldManifest.chapters.filter(({ id }) => /^chapter-02[5-9]-/.test(id));
+
+    expect(integratedScenes.map(({ id, title }) => [id, title])).toEqual(expectedScenes);
+    expect(integratedScenes.every(({ previewImage }) => previewImage === '/social-preview.svg')).toBe(true);
+  });
+
   it('preserves the five original space scenes after the first twelve chapters', () => {
     const expectedSpaceIds = [
       'chapter-013-event-horizon-gala',

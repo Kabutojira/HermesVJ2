@@ -1,7 +1,7 @@
 import type { WorldChapter } from '../../registry';
 
 export const neonCityConfig = {
-  id: 'chapter-025-neon-rain-city',
+  id: 'chapter-027-neon-rain-city',
   title: 'Neon Rain Crossing',
   description: 'A rain-dark ceremonial tower holds a quiet intersection while cyan and magenta light gathers only in broken pavement puddles.',
   palette: ['#02040a', '#46e6ff', '#141925', '#ff4fb4'],
