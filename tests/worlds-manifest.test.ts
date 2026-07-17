@@ -15,8 +15,8 @@ describe('world manifest', () => {
       'chapter-019-deep-space-convergence',
     ];
 
-    expect(worldManifest.chapters).toHaveLength(24);
-    expect(new Set(worldManifest.chapters.map((chapter) => chapter.id)).size).toBe(24);
+    expect(worldManifest.chapters).toHaveLength(27);
+    expect(new Set(worldManifest.chapters.map((chapter) => chapter.id)).size).toBe(27);
     expect(worldManifest.chapters.slice(12, 17).map((chapter) => chapter.id)).toEqual(expectedSpaceIds);
   });
 });
